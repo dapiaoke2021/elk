@@ -1,0 +1,32 @@
+name:  access-error-alert
+type: frequency
+index: logstash-portal-*
+num_events: 1
+timeframe:
+  seconds: 5
+filter:
+- range:
+    response:
+      from: 500
+      to: 599
+alert:
+- "telegram"
+alert_text: "
+方法: {}\n
+请求链接: {}\n
+状 态 码: {}\n
+后端服务器: {}\n
+响应时间: {}\n
+数      量: {}
+"
+alert_text_type: alert_text_only
+telegram_bot_token: 1598620697:AAH3ZiMrZ1J74FoY4OxXfLKyfqP8uFAyipE
+telegram_room_id: "1058704380"
+
+alert_text_args:
+- http_method
+- http_request
+- response
+- upsteam
+- responseTime
+- num_hits
